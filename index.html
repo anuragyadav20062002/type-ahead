@@ -35,11 +35,18 @@ function displayValue(){
     
     var matchCities= matchWords(this.value, cities)
     var html= matchCities.map(place=>{
-        return `<li>
-            <span class="name"></span>
-            <span class="population"></span>
-            </li>`
-    })
+
+      var regex = new RegExp(this.value, 'gi');
+      var cityname = place.city.replace('regex', `<span class="hl">${this.value}</span>`)
+      var statename = place.state.replace('regex', `<span class="hl">${this.value}</span>`)
+        return `
+      <li>
+        <span class="name">${cityname}, ${statename}</span>
+        <span class="population">${(place.population)}</span>
+      </li>
+    `;
+    }).join('')
+    suggestions.innerHTML= html;
 
 }
 
